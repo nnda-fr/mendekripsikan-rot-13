@@ -1,42 +1,40 @@
 # 🛡️ Implementasi Kriptografi Klasik: ROT13
 
 [![Python Version](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Course](https://img.shields.io/badge/Mata%20Kuliah-Hukum%20Cyber-red.svg)](#)
 
 ## 📝 Deskripsi Proyek
-Repositori ini berisi implementasi algoritma enkripsi **ROT13** menggunakan Python. Proyek ini disusun untuk memenuhi tugas mata kuliah **Hukum Cyber**, guna mendemonstrasikan prinsip dasar kerahasiaan data (*Data Confidentiality*) melalui teknik kriptografi sederhana.
+Repositori ini berisi implementasi algoritma enkripsi **ROT13** menggunakan Python. Proyek ini disusun untuk tugas mata kuliah **Hukum Cyber**, guna mendemonstrasikan prinsip dasar kerahasiaan data (*Data Confidentiality*) melalui teknik kriptografi sederhana.
 
-Dalam dunia hukum siber, pemahaman tentang enkripsi merupakan fondasi dalam mempelajari perlindungan data pribadi dan keamanan informasi.
+Dalam perspektif hukum siber, pemahaman tentang enkripsi sangat penting karena berkaitan dengan aspek keamanan data dan perlindungan informasi pribadi (UU PDP).
 
 ---
 
 ## ⚙️ Cara Kerja Algoritma
-ROT13 (*Rotate by 13 places*) adalah varian dari *Caesar Cipher*. Algoritma ini mengganti setiap huruf dengan huruf ke-13 setelahnya dalam urutan alfabet.
+ROT13 (*Rotate by 13 places*) adalah algoritma pergeseran alfabet. Karena alfabet memiliki 26 karakter, pergeseran sebanyak 13 posisi membuat proses enkripsi dan dekripsi menjadi identik.
 
 ### Karakteristik Teknis:
 | Fitur | Deskripsi |
 | :--- | :--- |
 | **Jenis** | Substitution Cipher |
-| **Kunci** | Statis (13) |
-| **Sifat** | Resiprokal (Enkripsi & Dekripsi menggunakan fungsi yang sama) |
-| **Kompleksitas** | Rendah (Hanya untuk pengaburan teks, bukan keamanan tingkat tinggi) |
+| **Logika** | Pergeseran 13 karakter ke belakang (modulo 26) |
+| **Sifat** | Resiprokal (Fungsi yang sama untuk Enkripsi & Dekripsi) |
 
 ---
 
-## 💻 Implementasi Kode
-Kode ini dirancang untuk menangani huruf besar (*uppercase*) dan huruf kecil (*lowercase*) tanpa merubah simbol atau angka.
+## 💻 Implementasi Kode (Sesuai `rot13.ipynb`)
+Kode ini menggunakan manipulasi nilai ASCII untuk menggeser karakter tanpa merusak simbol atau tanda baca.
 
 ```python
 def rot13_transform(text):
     transformed_text = ""
     for char in text:
         if 'a' <= char <= 'z':
-            # Pergeseran modulo 26 untuk huruf kecil
-            transformed_text += chr(((ord(char) - ord('a') + 13) % 26) + ord('a'))
+            # Implementasi pergeseran mundur 13 posisi
+            transformed_text += chr(((ord(char) - ord('a') - 13 + 26) % 26) + ord('a'))
         elif 'A' <= char <= 'Z':
-            # Pergeseran modulo 26 untuk huruf besar
-            transformed_text += chr(((ord(char) - ord('A') + 13) % 26) + ord('A'))
+            # Implementasi untuk huruf besar
+            transformed_text += chr(((ord(char) - ord('A') - 13 + 26) % 26) + ord('A'))
         else:
             transformed_text += char
     return transformed_text
